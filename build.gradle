@@ -1,0 +1,63 @@
+plugins {
+  id 'ear'
+}
+
+group 'fr.stevenhenry172.jeeonlineshop'
+version '1.0'
+
+subprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = 16
+    targetCompatibility = 16
+
+    // -------------------- DEPENDENCIES --------------------
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    }
+
+    test {useJUnitPlatform()}
+
+    // -------------------- ARCHIVE GENERATION --------------------
+
+    jar {
+        manifest {
+            attributes 'Built-By': 'Steven HENRY'
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    javadoc {
+        source = sourceSets.main.allJava
+    }
+}
+
+repositories { mavenCentral() }
+
+
+dependencies {
+    deploy project('OnlineShop-EJB')
+    earlib project('OnlineShop-Entity')
+}
+
+tasks.named('ear') {
+    // appDirectory = file('OnlineShop-Client/src/main/java')
+    libDirName 'APP-INF/library'
+
+    deploymentDescriptor {
+        applicationName = "JEE-OnlineShop-Ear"
+        description = "TP Projet JEE Online Shop"
+
+        initializeInOrder = true
+        // module("MyLibraryClientApp.jar", "java")  // won't deploy as my.jar isn't deploy dependency
+    }
+}

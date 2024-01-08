@@ -1,0 +1,17 @@
+group 'fr.stevenhenry172.jeeonlineshop.bean'
+version '1.0'
+description = 'Online shop EJB project'
+
+// -------------------- DEPENDENCIES --------------------
+
+dependencies {
+    implementation project(':OnlineShop-Entity')
+
+    compileOnly('jakarta.enterprise:jakarta.enterprise.cdi-api:3.0.0')
+    compileOnly('jakarta.ejb:jakarta.ejb-api:4.0.0')
+    implementation('org.hibernate.validator:hibernate-validator:7.0.5.Final')
+}
+
+jar {
+    setArchiveFileName(archiveBaseName.get() + '.' +archiveExtension.get())
+}

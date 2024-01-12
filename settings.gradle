@@ -1,5 +1,5 @@
-rootProject.name = "JEE-OnlineShop"
-include 'OnlineShop-EJB'
-include 'OnlineShop-Entity'
-include 'OnlineShop-Client'
+rootProject.name = "JEEOnlineShop"
+include 'OnlineShopEJB'
+include 'OnlineShopClient'
+include 'OnlineShopEntities'
 

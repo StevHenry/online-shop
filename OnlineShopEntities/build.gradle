@@ -1,0 +1,3 @@
+group 'fr.stevenhenry172.jeeonlineshop.entities'
+version '1.0'
+description = 'JEE Online Shop project entities'

@@ -1,10 +1,10 @@
 package fr.stevenhenry172.jeeonlineshop.bean.manager;
 
-import fr.stevenhenry172.jeeonlineshop.bean.dao.Dao;
-import fr.stevenhenry172.jeeonlineshop.entity.Article;
-import fr.stevenhenry172.jeeonlineshop.entity.Cart;
-import fr.stevenhenry172.jeeonlineshop.entity.Product;
-import fr.stevenhenry172.jeeonlineshop.entity.UserAccount;
+import fr.stevenhenry172.jeeonlineshop.bean.dao.CartDao;
+import fr.stevenhenry172.jeeonlineshop.bean.dao.ProductDao;
+import fr.stevenhenry172.jeeonlineshop.entities.Article;
+import fr.stevenhenry172.jeeonlineshop.entities.Product;
+import fr.stevenhenry172.jeeonlineshop.entities.UserAccount;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -16,13 +16,12 @@ import java.rmi.RemoteException;
 public class CartManager implements CartManagerRemote {
 
     @EJB
-    Dao<Cart> cartDao;
+    CartDao cartDao;
 
     @EJB
-    Dao<Product> productDao;
+    ProductDao productDao;
 
-    @Override
-    public boolean addArticle(UserAccount account, Article<?> article) throws RemoteException {
+    public boolean addArticle(UserAccount account, Article<?> article) {
         Product product = article.getProduct();
         if (product.getStock() > article.getQuantity()) {
             account.getCart().getArticles().add(article);
@@ -34,8 +33,7 @@ public class CartManager implements CartManagerRemote {
         return false;
     }
 
-    @Override
-    public boolean removeArticle(UserAccount account, Article<?> article) throws RemoteException {
+    public boolean removeArticle(UserAccount account, Article<?> article) {
         Product product = article.getProduct();
         if (account.getCart().getArticles().contains(article)) {
             account.getCart().getArticles().remove(article);

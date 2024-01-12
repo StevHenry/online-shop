@@ -1,10 +1,11 @@
 package fr.stevenhenry172.jeeonlineshop.bean.manager;
 
-import fr.stevenhenry172.jeeonlineshop.bean.dao.Dao;
+import fr.stevenhenry172.jeeonlineshop.bean.dao.CartDao;
+import fr.stevenhenry172.jeeonlineshop.bean.dao.OrderDao;
 import fr.stevenhenry172.jeeonlineshop.bean.dao.UserAccountDao;
-import fr.stevenhenry172.jeeonlineshop.entity.Cart;
-import fr.stevenhenry172.jeeonlineshop.entity.Order;
-import fr.stevenhenry172.jeeonlineshop.entity.UserAccount;
+import fr.stevenhenry172.jeeonlineshop.entities.Cart;
+import fr.stevenhenry172.jeeonlineshop.entities.Order;
+import fr.stevenhenry172.jeeonlineshop.entities.UserAccount;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -17,16 +18,15 @@ import java.time.LocalDateTime;
 public class OrderManager implements OrderManagerRemote {
 
     @EJB
-    Dao<Cart> cartDao;
+    CartDao cartDao;
 
     @EJB
-    Dao<Order> orderDao;
+    OrderDao orderDao;
 
     @EJB
     UserAccountDao userDao;
 
-    @Override
-    public void validateCart(UserAccount account) throws RemoteException {
+    public void validateCart(UserAccount account) {
         Cart cart = account.getCart();
         Order order = new Order();
         order.setArticles(cart.getArticles());

@@ -1,8 +1,8 @@
 package fr.stevenhenry172.jeeonlineshop.bean.manager;
 
 import fr.stevenhenry172.jeeonlineshop.bean.dao.UserAccountDao;
-import fr.stevenhenry172.jeeonlineshop.entity.Cart;
-import fr.stevenhenry172.jeeonlineshop.entity.UserAccount;
+import fr.stevenhenry172.jeeonlineshop.entities.Cart;
+import fr.stevenhenry172.jeeonlineshop.entities.UserAccount;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -18,8 +18,7 @@ public class AccountManager implements AccountManagerRemote {
     @EJB
     UserAccountDao dao;
 
-    @Override
-    public Optional<UserAccount> createAccount(String firstName, String name, String login, String password) throws RemoteException {
+    public Optional<UserAccount> createAccount(String firstName, String name, String login, String password) {
         if (dao.isUsernameAvailable(login)) {
             var account = new UserAccount();
             account.setName(name);
@@ -36,7 +35,7 @@ public class AccountManager implements AccountManagerRemote {
     }
 
     @Override
-    public Optional<UserAccount> attemptLogin(String login, String password) throws RemoteException {
+    public Optional<UserAccount> attemptLogin(String login, String password) {
         return dao.getUser(login, password);
     }
 }

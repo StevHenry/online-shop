@@ -1,6 +1,6 @@
 package fr.stevenhenry172.jeeonlineshop.bean.manager;
 
-import fr.stevenhenry172.jeeonlineshop.entity.UserAccount;
+import fr.stevenhenry172.jeeonlineshop.entities.UserAccount;
 import jakarta.ejb.Remote;
 
 import java.rmi.RemoteException;
@@ -13,5 +13,5 @@ public interface OrderManagerRemote {
      * @param account UserAccount instance used as an authentication key
      * @throws RemoteException
      */
-    void validateCart(UserAccount account) throws RemoteException;
+    void validateCart(UserAccount account);
 }

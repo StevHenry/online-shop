@@ -1,7 +1,7 @@
 package fr.stevenhenry172.jeeonlineshop.bean.manager;
 
-import fr.stevenhenry172.jeeonlineshop.entity.Article;
-import fr.stevenhenry172.jeeonlineshop.entity.UserAccount;
+import fr.stevenhenry172.jeeonlineshop.entities.Article;
+import fr.stevenhenry172.jeeonlineshop.entities.UserAccount;
 import jakarta.ejb.Remote;
 
 import java.rmi.RemoteException;
@@ -16,7 +16,7 @@ public interface CartManagerRemote {
      * @return whether the adding of the article is a success
      * @throws RemoteException if an error occurs with the connection
      */
-    boolean addArticle(UserAccount account, Article<?> article) throws RemoteException;
+    boolean addArticle(UserAccount account, Article<?> article);
 
     /**
      * Remove an article from an account cart
@@ -25,5 +25,5 @@ public interface CartManagerRemote {
      * @return whether the removal of the article is a success
      * @throws RemoteException if an error occurs with the connection
      */
-    boolean removeArticle(UserAccount account, Article<?> article) throws RemoteException;
+    boolean removeArticle(UserAccount account, Article<?> article);
 }

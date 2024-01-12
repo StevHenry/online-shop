@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/OnlineShop-Client" />
             <option value="$PROJECT_DIR$/OnlineShop-EJB" />
             <option value="$PROJECT_DIR$/OnlineShop-Entity" />
           </set>

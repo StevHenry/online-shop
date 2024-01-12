@@ -5,6 +5,9 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+/**
+ * This class is the generic class used for DAOs in this project
+ */
 @Stateless
 @LocalBean
 public class Dao<T> {

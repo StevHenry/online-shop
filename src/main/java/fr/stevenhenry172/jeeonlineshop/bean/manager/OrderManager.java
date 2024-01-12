@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Stateless
 @LocalBean
-public class OrderManager {
+public class OrderManager implements OrderManagerRemote {
 
     @EJB
     Dao<Cart> cartDao;
@@ -24,7 +24,8 @@ public class OrderManager {
     @EJB
     UserAccountDao userDao;
 
-    public void validateCart(Cart cart) {
+    @Override
+    public void validateCart(Cart cart) throws RemoteException {
         Order order = new Order();
         order.setArticles(cart.getArticles());
         order.setAccount(cart.getAccount());

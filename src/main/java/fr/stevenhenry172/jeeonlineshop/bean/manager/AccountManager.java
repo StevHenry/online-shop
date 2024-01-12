@@ -13,12 +13,13 @@ import java.util.Optional;
 
 @Stateless
 @LocalBean
-public class AccountManager {
+public class AccountManager implements AccountManagerRemote {
 
     @EJB
     UserAccountDao dao;
 
-    public UserAccount createAccount(String firstName, String name, String login, String password) {
+    @Override
+    public UserAccount createAccount(String firstName, String name, String login, String password) throws RemoteException {
         var account = new UserAccount();
         account.setName(name);
         account.setFirstName(firstName);
@@ -31,7 +32,8 @@ public class AccountManager {
         return account;
     }
 
-    public Optional<UserAccount> getUser(String login, String password) {
+    @Override
+    public Optional<UserAccount> attemptLogin(String login, String password) throws RemoteException {
         return dao.getUser(login, password);
     }
 }

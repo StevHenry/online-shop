@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 
 @Stateless
 @LocalBean
-public class CartManager {
+public class CartManager implements CartManagerRemote {
 
     @EJB
     Dao<Cart> cartDao;
@@ -21,10 +21,8 @@ public class CartManager {
     @EJB
     Dao<Product> productDao;
 
-    @EJB
-    Dao<Article<?>> articleDao;
-
-    public boolean addArticle(UserAccount account, Article<?> article) {
+    @Override
+    public boolean addArticle(UserAccount account, Article<?> article) throws RemoteException {
         Product product = article.getProduct();
         if (product.getStock() > article.getQuantity()) {
             account.getCart().getArticles().add(article);
@@ -36,7 +34,8 @@ public class CartManager {
         return false;
     }
 
-    public boolean removeArticle(UserAccount account, Article<?> article) {
+    @Override
+    public boolean removeArticle(UserAccount account, Article<?> article) throws RemoteException {
         Product product = article.getProduct();
         if (account.getCart().getArticles().contains(article)) {
             account.getCart().getArticles().remove(article);

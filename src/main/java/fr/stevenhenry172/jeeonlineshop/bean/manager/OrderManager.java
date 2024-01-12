@@ -4,6 +4,7 @@ import fr.stevenhenry172.jeeonlineshop.bean.dao.Dao;
 import fr.stevenhenry172.jeeonlineshop.bean.dao.UserAccountDao;
 import fr.stevenhenry172.jeeonlineshop.entity.Cart;
 import fr.stevenhenry172.jeeonlineshop.entity.Order;
+import fr.stevenhenry172.jeeonlineshop.entity.UserAccount;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -25,7 +26,8 @@ public class OrderManager implements OrderManagerRemote {
     UserAccountDao userDao;
 
     @Override
-    public void validateCart(Cart cart) throws RemoteException {
+    public void validateCart(UserAccount account) throws RemoteException {
+        Cart cart = account.getCart();
         Order order = new Order();
         order.setArticles(cart.getArticles());
         order.setAccount(cart.getAccount());

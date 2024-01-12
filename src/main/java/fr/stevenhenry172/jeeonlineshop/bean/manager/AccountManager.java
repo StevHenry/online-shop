@@ -19,17 +19,20 @@ public class AccountManager implements AccountManagerRemote {
     UserAccountDao dao;
 
     @Override
-    public UserAccount createAccount(String firstName, String name, String login, String password) throws RemoteException {
-        var account = new UserAccount();
-        account.setName(name);
-        account.setFirstName(firstName);
-        account.setLogin(login);
-        account.setPassword(password);
-        account.setOrders(new ArrayList<>());
-        account.setCart(new Cart());
+    public Optional<UserAccount> createAccount(String firstName, String name, String login, String password) throws RemoteException {
+        if (dao.isUsernameAvailable(login)) {
+            var account = new UserAccount();
+            account.setName(name);
+            account.setFirstName(firstName);
+            account.setLogin(login);
+            account.setPassword(password);
+            account.setOrders(new ArrayList<>());
+            account.setCart(new Cart());
 
-        dao.save(account);
-        return account;
+            dao.save(account);
+            return Optional.of(account);
+        }
+        return Optional.empty();
     }
 
     @Override
